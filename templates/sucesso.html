@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block corpo %}
+<h1>Chamado #{{ chamado_id }} registrado</h1>
+<p>A equipe de TI foi avisada e entrará em contato.</p>
+<p><a href="{{ url_for('abrir_chamado') }}">Abrir outro chamado</a></p>
+{% endblock %}

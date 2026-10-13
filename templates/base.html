@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block titulo %}Chamados de TI{% endblock %}</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:{% block largura %}640px{% endblock %};margin:2rem auto;padding:0 1rem;color:#1f2937}
+  label{display:block;margin-top:.9rem;font-weight:600}
+  input,select,textarea{width:100%;padding:.5rem;margin-top:.25rem;border:1px solid #cbd5e1;border-radius:6px;box-sizing:border-box;font:inherit}
+  button{margin-top:1.2rem;padding:.6rem 1.2rem;border:0;border-radius:6px;background:#2563eb;color:#fff;font:inherit;cursor:pointer}
+  .erro{background:#fee2e2;color:#991b1b;padding:.6rem;border-radius:6px}
+  table{border-collapse:collapse;width:100%;font-size:.9rem}
+  th,td{border:1px solid #e2e8f0;padding:.4rem;text-align:left;vertical-align:top}
+  th{background:#f1f5f9}
+  .tabela{overflow-x:auto}
+  td form{display:inline}
+  td button{margin:0;padding:.2rem .5rem;font-size:.8rem}
+</style>
+</head>
+<body>{% block corpo %}{% endblock %}</body>
+</html>

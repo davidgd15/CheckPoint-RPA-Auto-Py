@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block corpo %}
+<h1>Abrir chamado de TI</h1>
+{% if erro %}<p class="erro">{{ erro }}</p>{% endif %}
+<form method="post">
+  <label>Seu nome <input name="solicitante" value="{{ form.solicitante }}" required></label>
+  <label>Setor / local <input name="setor" value="{{ form.setor }}" required></label>
+  <label>Contato (e-mail ou ramal) <input name="contato" value="{{ form.contato }}" required></label>
+  <label>Título do problema <input name="titulo" value="{{ form.titulo }}" required></label>
+  <label>Detalhes <textarea name="detalhes" rows="5" required>{{ form.detalhes }}</textarea></label>
+  <label>Equipamento afetado <input name="equipamento" value="{{ form.equipamento }}" placeholder="Ex.: Notebook Dell, impressora HP" required></label>
+  <label>Nº de patrimônio (opcional) <input name="patrimonio" value="{{ form.patrimonio }}"></label>
+  <label>Desde quando ocorre o problema? <input type="date" name="desde" max="{{ hoje }}" value="{{ form.desde or hoje }}" required></label>
+  <label>Prioridade
+    <select name="prioridade" required>
+      {% for p in prioridades %}<option value="{{ p }}" {{ 'selected' if (form.prioridade or 'média') == p }}>{{ p|capitalize }}</option>{% endfor %}
+    </select>
+  </label>
+  <button type="submit">Enviar chamado</button>
+</form>
+{% endblock %}

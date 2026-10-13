@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block largura %}1200px{% endblock %}
+{% block corpo %}
+<h1>Chamados (TI)</h1>
+<p>Filtrar:
+  <a href="{{ url_for('lista') }}">todos</a>
+  {% for s in status_opcoes %} | <a href="{{ url_for('lista', status=s) }}">{{ s }}</a>{% endfor %}
+</p>
+<div class="tabela">
+<table id="chamados">
+  <thead><tr><th>ID</th><th>Aberto em</th><th>Solicitante</th><th>Setor</th><th>Contato</th><th>Título</th><th>Detalhes</th><th>Equipamento</th><th>Patrimônio</th><th>Desde</th><th>Prioridade</th><th>Status</th></tr></thead>
+  <tbody>
+  {% for c in chamados %}
+  {# O monitor lê estas linhas: data-* e classes das células são o "contrato" do scraping. #}
+  <tr data-id="{{ c.id }}" data-notificado="{{ c.notificado }}" data-lembrete="{{ c.ultimo_lembrete or '' }}">
+    <td class="id">{{ c.id }}</td>
+    <td class="aberto">{{ c.aberto_em }}</td>
+    <td class="solicitante">{{ c.solicitante }}</td>
+    <td class="setor">{{ c.setor }}</td>
+    <td class="contato">{{ c.contato }}</td>
+    <td class="titulo">{{ c.titulo }}</td>
+    <td class="detalhes">{{ c.detalhes }}</td>
+    <td class="equipamento">{{ c.equipamento }}</td>
+    <td class="patrimonio">{{ c.patrimonio or '' }}</td>
+    <td class="desde">{{ c.desde }}</td>
+    <td class="prioridade">{{ c.prioridade }}</td>
+    <td class="status">{{ c.status }}
+      {% for s in status_opcoes if s != c.status %}
+      <form method="post" action="{{ url_for('mudar_status', chamado_id=c.id) }}">
+        <input type="hidden" name="status" value="{{ s }}"><button>{{ s }}</button>
+      </form>
+      {% endfor %}
+    </td>
+  </tr>
+  {% else %}<tr><td colspan="12">Nenhum chamado.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
